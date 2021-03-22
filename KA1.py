@@ -31,12 +31,12 @@ def is_acyclic(matrix, root=0):
                     if matrix[current_node][next_node] == "1":
                         visited.append(next_node)
                         previous_nodes[next_node] = current_node
-                        print(str(current_node+1)+" "+str(next_node+1))
-                        print(previous_nodes)
+                        #print(str(current_node+1)+" "+str(next_node+1))
+                        #print(previous_nodes)
                 else:
                     if matrix[current_node][next_node] == "1":
-                        print(str(current_node+1)+" "+str(next_node+1))
-                        print(previous_nodes)
+                        #print(str(current_node+1)+" "+str(next_node+1))
+                        #print(previous_nodes)
                         # если вершина была посещена и мы можем в нее пойти, то мы встретили цикл
                         cycle = get_cycle(matrix, previous_nodes, current_node, next_node, root)
                         return False, cycle
