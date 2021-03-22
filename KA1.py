@@ -52,6 +52,14 @@ def get_cycle(matrix, previous_nodes, current_node, next_node, root):
         node = previous_nodes[node]
         cycle.append(node)
     cycle.sort()  
+    # дабы избавиться от хвоста в цикле, удаляю все вершины до той,
+    # из которой впервые можно перейти в "последнюю" вершину цикла
+    i = 0
+    for i in range(0, len(cycle)):
+        if matrix[cycle[i]][next_node] == "1":
+            break
+    cycle = cycle[i:]        
+        
     return cycle              
         
         
