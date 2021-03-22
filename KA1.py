@@ -25,19 +25,22 @@ def is_acyclic(matrix, root=0):
         current_node = visited.popleft()
         # проверяем, есть ли смежная нашей и не посещенная вершина
         for next_node in nodes:
-            if previous_nodes[next_node] is None:
-                if matrix[current_node][next_node] == "1":
-                    visited.append(next_node)
-                    previous_nodes[next_node] = current_node
-                    #print(str(current_node+1)+" "+str(next_node+1))
-                    #print(previous_nodes)
-            else:
-                if matrix[current_node][next_node] == "1":
-                    # если вершина была посещена и мы можем в нее пойти, то мы встретили цикл
-                    cycle = get_cycle(matrix, previous_nodes, current_node, next_node, root)
-                    if len(cycle) > 1:
+            # индекс следующей вершины должен быть больше предыдущей
+            if current_node <= next_node:
+                if previous_nodes[next_node] is None:
+                    if matrix[current_node][next_node] == "1":
+                        visited.append(next_node)
+                        previous_nodes[next_node] = current_node
+                        print(str(current_node+1)+" "+str(next_node+1))
+                        print(previous_nodes)
+                else:
+                    if matrix[current_node][next_node] == "1":
+                        print(str(current_node+1)+" "+str(next_node+1))
+                        print(previous_nodes)
+                        # если вершина была посещена и мы можем в нее пойти, то мы встретили цикл
+                        cycle = get_cycle(matrix, previous_nodes, current_node, next_node, root)
                         return False, cycle
-                    return True, None
+    return True, None
                     
 def get_cycle(matrix, previous_nodes, current_node, next_node, root):
     cycle = []
